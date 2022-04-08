@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "362999986671",
+    "project_id": "trek-xplorer",
+    "storage_bucket": "trek-xplorer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362999986671:android:16faa3d2b23c8fcd6c5e1a",
+        "android_client_info": {
+          "package_name": "com.example.trek_xplorer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362999986671-bu9ne66lfu361n1ha42qsf3pt96nnbng.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trek_xplorer",
+            "certificate_hash": "6c77d17687ba7e6e5b48d854abc1b87fc7b0c5cb"
+          }
+        },
+        {
+          "client_id": "362999986671-oo52627b3bp6vqj7i7lu5siil1pau5qh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg-SEsH7CvS-4_kmwXI8z_U9PZajJ-LRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362999986671-oo52627b3bp6vqj7i7lu5siil1pau5qh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
