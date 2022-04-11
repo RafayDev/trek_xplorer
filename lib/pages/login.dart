@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:trek_xplorer/pages/signup.dart';
+import 'package:trek_xplorer/pages/csignup.dart';
 import 'package:trek_xplorer/pages/user/user_main.dart';
 
 import 'forgot_password.dart';
@@ -71,15 +72,24 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("User Login"),
-      ),
       body: Form(
         key: _formKey,
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
           child: ListView(
             children: [
+              Container(
+                //  margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: Image.asset('images/Logo.png'),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: Text("Login Here...",
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 129, 0, 155),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25)),
+              ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
@@ -126,7 +136,7 @@ class _LoginState extends State<Login> {
               Container(
                 margin: EdgeInsets.only(left: 60.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
                       onPressed: () {
@@ -176,20 +186,28 @@ class _LoginState extends State<Login> {
                             ),
                             (route) => false)
                       },
-                      child: Text('Signup'),
+                      child: Text('Users Signup'),
                     ),
-                    // TextButton(
-                    //   onPressed: () => {
-                    //     Navigator.pushAndRemoveUntil(
-                    //         context,
-                    //         PageRouteBuilder(
-                    //           pageBuilder: (context, a, b) => UserMain(),
-                    //           transitionDuration: Duration(seconds: 0),
-                    //         ),
-                    //         (route) => false)
-                    //   },
-                    //   child: Text('Dashboard'),
-                    // ),
+                  ],
+                ),
+              ),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Want to Register Company? "),
+                    TextButton(
+                      onPressed: () => {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, a, b) => Csignup(),
+                              transitionDuration: Duration(seconds: 0),
+                            ),
+                            (route) => false)
+                      },
+                      child: Text('Register Company'),
+                    ),
                   ],
                 ),
               )

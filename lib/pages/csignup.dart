@@ -3,24 +3,34 @@ import 'package:flutter/material.dart';
 
 import 'package:trek_xplorer/pages/login.dart';
 
-class Signup extends StatefulWidget {
-  Signup({Key? key}) : super(key: key);
+class Csignup extends StatefulWidget {
+  const Csignup({Key? key}) : super(key: key);
 
   @override
-  _SignupState createState() => _SignupState();
+  State<Csignup> createState() => _CsignupState();
 }
 
-class _SignupState extends State<Signup> {
+class _CsignupState extends State<Csignup> {
   final _formKey = GlobalKey<FormState>();
 
   var email = "";
   var password = "";
   var confirmPassword = "";
+  var companyname = "";
+  var dtsnumber = "";
+  var website = "";
+  var whatsapp = "";
+  var insta = "";
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final companynameController = TextEditingController();
+  final dtsnumberController = TextEditingController();
+  final websiteController = TextEditingController();
+  final whatsappController = TextEditingController();
+  final instaController = TextEditingController();
 
   @override
   void dispose() {
@@ -28,6 +38,11 @@ class _SignupState extends State<Signup> {
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+    companynameController.dispose();
+    dtsnumberController.dispose();
+    websiteController.dispose();
+    whatsappController.dispose();
+    instaController.dispose();
     super.dispose();
   }
 
@@ -96,7 +111,8 @@ class _SignupState extends State<Signup> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("User Signp"),
+        centerTitle: true,
+        title: Text("Comapny Signup"),
       ),
       body: Form(
         key: _formKey,
@@ -104,6 +120,46 @@ class _SignupState extends State<Signup> {
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
           child: ListView(
             children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    labelText: 'Comapny Name: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                  ),
+                  controller: companynameController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Company Name';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    labelText: 'DTS Number: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                  ),
+                  controller: dtsnumberController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter DTS Number';
+                    }
+                    return null;
+                  },
+                ),
+              ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
@@ -121,6 +177,66 @@ class _SignupState extends State<Signup> {
                       return 'Please Enter Email';
                     } else if (!value.contains('@')) {
                       return 'Please Enter Valid Email';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    labelText: 'Webiste Url: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                  ),
+                  controller: websiteController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Website Url';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    labelText: 'Instagram Username: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                  ),
+                  controller: instaController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Instagram Username';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: TextFormField(
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    labelText: 'Whatsapp No.: ',
+                    labelStyle: TextStyle(fontSize: 20.0),
+                    border: OutlineInputBorder(),
+                    errorStyle:
+                        TextStyle(color: Colors.redAccent, fontSize: 15),
+                  ),
+                  controller: whatsappController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Whatsapp No.';
                     }
                     return null;
                   },
@@ -180,12 +296,17 @@ class _SignupState extends State<Signup> {
                             email = emailController.text;
                             password = passwordController.text;
                             confirmPassword = confirmPasswordController.text;
+                            companyname = companynameController.text;
+                            dtsnumber = dtsnumberController.text;
+                            website = websiteController.text;
+                            insta = instaController.text;
+                            whatsapp = whatsappController.text;
                           });
                           registration();
                         }
                       },
                       child: Text(
-                        'Sign Up',
+                        'Register',
                         style: TextStyle(fontSize: 18.0),
                       ),
                     ),
@@ -209,7 +330,7 @@ class _SignupState extends State<Signup> {
                                 ),
                               )
                             },
-                        child: Text('Login'))
+                        child: Text('Login Here...'))
                   ],
                 ),
               )
