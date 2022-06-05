@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trek_xplorer/pages/comapny/company_main.dart';
 
 import 'package:trek_xplorer/pages/signup.dart';
 import 'package:trek_xplorer/pages/csignup.dart';
@@ -15,10 +17,13 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final Stream<QuerySnapshot> usersStream =
+      FirebaseFirestore.instance.collection('users').snapshots();
   final _formKey = GlobalKey<FormState>();
 
   var email = "";
   var password = "";
+  var isorg = "";
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final emailController = TextEditingController();
@@ -28,12 +33,22 @@ class _LoginState extends State<Login> {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => UserMain(),
-        ),
-      );
+
+      if (isorg == "Yes") {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CompanyMain(),
+          ),
+        );
+      } else if (isorg == "No") {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UserMain(),
+          ),
+        );
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print("No User Found for that Email");
@@ -59,6 +74,20 @@ class _LoginState extends State<Login> {
         );
       }
     }
+  }
+
+  checkorg() async {
+    var collection = FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: "$email");
+    var querySnapshot = await collection.get();
+    for (var queryDocumentSnapshot in querySnapshot.docs) {
+      Map<String, dynamic> data = queryDocumentSnapshot.data();
+      //  var name = data['name'];
+      //  var phone = data['phone'];
+      isorg = data['isOrg'];
+    }
+    // print(isorg);
   }
 
   @override
@@ -146,6 +175,8 @@ class _LoginState extends State<Login> {
                             email = emailController.text;
                             password = passwordController.text;
                           });
+                          // userLogin();
+                          checkorg();
                           userLogin();
                         }
                       },

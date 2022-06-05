@@ -1,6 +1,8 @@
+import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:trek_xplorer/pages/login.dart';
 
 class Csignup extends StatefulWidget {
@@ -21,6 +23,8 @@ class _CsignupState extends State<Csignup> {
   var website = "";
   var whatsapp = "";
   var insta = "";
+  var isOrg = "Yes";
+  late bool api;
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final emailController = TextEditingController();
@@ -46,8 +50,47 @@ class _CsignupState extends State<Csignup> {
     super.dispose();
   }
 
+  fetchdata() async {
+    final response = await http.get(Uri.parse(
+        'https://tousirmapi.herokuapp.com/getcompany/$companyname/$dtsnumber'));
+    bool data = jsonDecode(response.body);
+    // print(data);
+    api = data;
+    //  print(api);
+    if (api == false) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.orangeAccent,
+          content: Text(
+            "Company Not Registered in Nadra",
+            style: TextStyle(fontSize: 18.0, color: Colors.black),
+          ),
+        ),
+      );
+    }
+  }
+
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+  addUser() async {
+    if (api == true) {
+      return users
+          .add({
+            'name': companyname,
+            'email': email,
+            'DtsNo': dtsnumber,
+            'instaUsername': insta,
+            'isOrg': isOrg,
+            'whatsapp': whatsapp,
+            'website': website
+          })
+          .then((value) => print('User Added'))
+          .catchError((error) => print('Failed to Add user: $error'));
+    }
+  }
+
   registration() async {
-    if (password == confirmPassword) {
+    if (password == confirmPassword && api == true) {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
@@ -112,7 +155,7 @@ class _CsignupState extends State<Csignup> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Comapny Signup"),
+        title: Text("Company Signup"),
       ),
       body: Form(
         key: _formKey,
@@ -125,7 +168,7 @@ class _CsignupState extends State<Csignup> {
                 child: TextFormField(
                   autofocus: false,
                   decoration: InputDecoration(
-                    labelText: 'Comapny Name: ',
+                    labelText: 'Company Name: ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
                     errorStyle:
@@ -302,7 +345,10 @@ class _CsignupState extends State<Csignup> {
                             insta = instaController.text;
                             whatsapp = whatsappController.text;
                           });
+                          // registration();
+                          fetchdata();
                           registration();
+                          addUser();
                         }
                       },
                       child: Text(

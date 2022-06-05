@@ -58,8 +58,8 @@ class _UserMainState extends State<UserMain> {
             label: 'Dashboard',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'My Profile',
+            icon: Icon(Icons.star),
+            label: 'Favorites',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
