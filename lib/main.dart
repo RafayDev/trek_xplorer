@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trek_xplorer/pages/comapny/company_main.dart';
 import 'package:trek_xplorer/pages/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 

@@ -22,6 +22,7 @@ class _AddtourState extends State<Addtour> {
   var location = "";
   var title = "";
   var price = "";
+  var enddate = "";
   //controllers for variables
   final dateController = TextEditingController();
   final detailsController = TextEditingController();
@@ -30,6 +31,7 @@ class _AddtourState extends State<Addtour> {
   final locationController = TextEditingController();
   final titleController = TextEditingController();
   final priceController = TextEditingController();
+  final enddateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +121,28 @@ class _AddtourState extends State<Addtour> {
                   child: TextFormField(
                     autofocus: false,
                     decoration: InputDecoration(
+                      labelText: 'End Date: YYYY-MM-DD',
+                      labelStyle: TextStyle(fontSize: 20.0),
+                      border: OutlineInputBorder(),
+                      errorStyle:
+                          TextStyle(color: Colors.redAccent, fontSize: 15),
+                    ),
+                    controller: enddateController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please Enter End Date';
+                      } else if (!value.contains('-')) {
+                        return 'Please Enter Valid Date Format';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 10.0),
+                  child: TextFormField(
+                    autofocus: false,
+                    decoration: InputDecoration(
                       labelText: 'Details: ',
                       labelStyle: TextStyle(fontSize: 20.0),
                       border: OutlineInputBorder(),
@@ -166,6 +190,7 @@ class _AddtourState extends State<Addtour> {
                               title = titleController.text;
                               location = locationController.text;
                               date = dateController.text;
+                              enddate = enddateController.text;
                               details = detailsController.text;
                               price = priceController.text;
                             });

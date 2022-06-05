@@ -229,7 +229,7 @@ class _SignupState extends State<Signup> {
                           });
                           registration();
                           //     .then=>
-                          //  addUser();
+                          addUser();
                         }
                       },
                       child: Text(
