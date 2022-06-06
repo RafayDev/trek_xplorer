@@ -75,10 +75,42 @@ class _AddtourState extends State<Addtour> {
     if (task == null) return;
 
     final snapshot = await task.whenComplete(() {});
-    final urlDownload = await snapshot.ref.getDownloadURL();
 
-    print('Download-Link: $urlDownload');
-    imgUrl = urlDownload;
+    final urlDownload = await snapshot.ref.getDownloadURL();
+    setState(() {
+      imgUrl = urlDownload;
+    });
+
+    //imgUrl = urlDownload;
+    print('Download-Link: $imgUrl');
+    addTour();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.greenAccent,
+        content: Text(
+          "Tour Added Sucessfully",
+          style: TextStyle(fontSize: 20.0),
+        ),
+      ),
+    );
+  }
+
+  CollectionReference tours = FirebaseFirestore.instance.collection('tours');
+
+  addTour() async {
+    return tours
+        .add({
+          'title': title,
+          'location': location,
+          'start-date': date,
+          'end-date': enddate,
+          'details': details,
+          'price': price,
+          'email': email,
+          'imgUrl': imgUrl,
+        })
+        .then((value) => print('Tour Added'))
+        .catchError((error) => print('Failed to Add Tour: $error'));
   }
 
   @override
@@ -127,7 +159,7 @@ class _AddtourState extends State<Addtour> {
                                           fit: BoxFit.fill,
                                         )
                                       : Image.network(
-                                          "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+                                          "https://firebasestorage.googleapis.com/v0/b/trek-xplorer.appspot.com/o/no%20image.png?alt=media&token=d8f6a74b-8b34-466b-a2e8-4447824b389c",
                                           fit: BoxFit.fill,
                                         ),
                                 ),
@@ -281,22 +313,29 @@ class _AddtourState extends State<Addtour> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          // Validate returns true if the form is valid, otherwise false.
-                          // if (_formKey.currentState!.validate()) {
-                          //   setState(() {
-                          //     // title = titleController.text;
-                          //     // location = locationController.text;
-                          //     // date = dateController.text;
-                          //     // enddate = enddateController.text;
-                          //     // details = detailsController.text;
-                          //     // price = priceController.text;
-                          //   });
-                          //   // registration();
-                          //   // fetchdata();
-                          //   //  registration();
-                          //   //  addUser();
-                          // }
-                          uploadPic(context);
+                          if (_formKey.currentState!.validate()) {
+                            setState(() {
+                              title = titleController.text;
+                              location = locationController.text;
+                              date = dateController.text;
+                              enddate = enddateController.text;
+                              details = detailsController.text;
+                              price = priceController.text;
+                            });
+                            // registration();
+                            // fetchdata();
+                            //  registration();
+                            //  addUser();
+
+                            uploadPic(context);
+                            // if (imgUrl != "") {
+                            //   addTour();
+                            // }
+                            // addTour();
+                            // if (imgUrl != "") {
+                            //   addTour();
+                            // }
+                          }
                         },
                         child: Text(
                           'Add Tour',
