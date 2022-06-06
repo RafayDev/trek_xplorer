@@ -1,7 +1,16 @@
+//import 'dart:html';
+//import 'dart: io' as i;
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'dart:io';
 
 class Addtour extends StatefulWidget {
   const Addtour({Key? key}) : super(key: key);
@@ -23,6 +32,8 @@ class _AddtourState extends State<Addtour> {
   var title = "";
   var price = "";
   var enddate = "";
+  var img = "";
+  File? _image;
   //controllers for variables
   final dateController = TextEditingController();
   final detailsController = TextEditingController();
@@ -33,6 +44,33 @@ class _AddtourState extends State<Addtour> {
   final priceController = TextEditingController();
   final enddateController = TextEditingController();
 
+  Future getImage() async {
+    final ImagePicker _picker = ImagePicker();
+    var image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+    // final path = image.files.single.path!;
+    final imageTemporary = File(image.path);
+    setState(() {
+      this._image = imageTemporary;
+    });
+
+    // setState(() {
+    //   _image = image as File?;
+    //   img = image.toString();
+    //   print('Image Path $image');
+    // });
+  }
+
+  // Future uploadPic(BuildContext context) async{
+  //   String fileName = basename(_image.path);
+  //    StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
+  //    StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
+  //    StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
+  //    setState(() {
+  //       print("Profile Picture uploaded");
+  //       Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+  //    });
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +91,55 @@ class _AddtourState extends State<Addtour> {
                           color: Color.fromARGB(255, 129, 0, 155),
                           fontWeight: FontWeight.bold,
                           fontSize: 25)),
+                ),
+                Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.center,
+                            child: CircleAvatar(
+                              radius: 100,
+                              backgroundColor: Color(0xff476cfb),
+                              child: ClipOval(
+                                child: new SizedBox(
+                                  width: 180.0,
+                                  height: 180.0,
+                                  child: (_image != null)
+                                      ? Image.file(
+                                          _image!,
+                                          fit: BoxFit.fill,
+                                        )
+                                      : Image.network(
+                                          "https://images.unsplash.com/photo-1502164980785-f8aa41d53611?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+                                          fit: BoxFit.fill,
+                                        ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 60.0),
+                            child: IconButton(
+                              icon: Icon(
+                                FontAwesomeIcons.camera,
+                                size: 30.0,
+                              ),
+                              onPressed: () {
+                                getImage();
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 10.0),
