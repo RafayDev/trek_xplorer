@@ -12,6 +12,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'dart:io';
 
+import '../../api/firebase_api.dart';
+
 class Addtour extends StatefulWidget {
   const Addtour({Key? key}) : super(key: key);
 
@@ -61,16 +63,24 @@ class _AddtourState extends State<Addtour> {
     // });
   }
 
-  // Future uploadPic(BuildContext context) async{
-  //   String fileName = basename(_image.path);
-  //    StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
-  //    StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
-  //    StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
-  //    setState(() {
-  //       print("Profile Picture uploaded");
-  //       Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
-  //    });
-  // }
+  Future uploadPic(BuildContext context) async {
+    if (_image == null) return;
+
+    final fileName = basename(_image!.path);
+    final destination = '$fileName';
+
+    var task = FirebaseApi.uploadFile(destination, _image!);
+    setState(() {});
+
+    if (task == null) return;
+
+    final snapshot = await task.whenComplete(() {});
+    final urlDownload = await snapshot.ref.getDownloadURL();
+
+    print('Download-Link: $urlDownload');
+    imgUrl = urlDownload;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -272,20 +282,21 @@ class _AddtourState extends State<Addtour> {
                       ElevatedButton(
                         onPressed: () {
                           // Validate returns true if the form is valid, otherwise false.
-                          if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              title = titleController.text;
-                              location = locationController.text;
-                              date = dateController.text;
-                              enddate = enddateController.text;
-                              details = detailsController.text;
-                              price = priceController.text;
-                            });
-                            // registration();
-                            // fetchdata();
-                            //  registration();
-                            //  addUser();
-                          }
+                          // if (_formKey.currentState!.validate()) {
+                          //   setState(() {
+                          //     // title = titleController.text;
+                          //     // location = locationController.text;
+                          //     // date = dateController.text;
+                          //     // enddate = enddateController.text;
+                          //     // details = detailsController.text;
+                          //     // price = priceController.text;
+                          //   });
+                          //   // registration();
+                          //   // fetchdata();
+                          //   //  registration();
+                          //   //  addUser();
+                          // }
+                          uploadPic(context);
                         },
                         child: Text(
                           'Add Tour',
