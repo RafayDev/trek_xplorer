@@ -58,64 +58,158 @@ class _ViewtourState extends State<Viewtour> {
             children: [
               for (var i = 0; i < storedocs.length; i++) ...[
                 Container(
-                  height: 550,
+                  height: 380,
                   width: 100,
                   child: Card(
-                    color: Color.fromARGB(255, 243, 159, 243),
+                    color: Color.fromARGB(225, 241, 116, 221),
                     child: Column(
                       children: [
-                        Image.network(
-                          storedocs[i]['imgUrl'],
-                          height: 250,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network(
+                            storedocs[i]['imgUrl'],
+                            width: 390,
+                            height: 150,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                         Column(
                           children: [
-                            Text(
-                              storedocs[i]['title'],
-                              style: DefaultTextStyle.of(context)
-                                  .style
-                                  .apply(fontSizeFactor: 2.0),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                storedocs[i]['title'],
+                                style: DefaultTextStyle.of(context)
+                                    .style
+                                    .apply(fontSizeFactor: 2.0),
+                              ),
                             ),
-                            Text(
-                              "Location",
-                              style: DefaultTextStyle.of(context)
-                                  .style
-                                  .apply(fontSizeFactor: 2.0),
+                            Padding(padding: EdgeInsets.all(10.0)),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Wrap(
+                                children: [
+                                  Icon(
+                                    Icons.location_on,
+                                    color: Colors.black,
+                                  ),
+                                  Text(
+                                    storedocs[i]['location'],
+                                    style: DefaultTextStyle.of(context)
+                                        .style
+                                        .apply(fontSizeFactor: 1.5),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                        100.0, 0.0, 0.0, 0.0),
+                                  ),
+                                  Icon(
+                                    Icons.date_range,
+                                    color: Colors.black,
+                                  ),
+                                  Text(
+                                    storedocs[i]['date'],
+                                    style: DefaultTextStyle.of(context)
+                                        .style
+                                        .apply(fontSizeFactor: 1.5),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Text(
-                              "Date",
-                              style: DefaultTextStyle.of(context)
-                                  .style
-                                  .apply(fontSizeFactor: 2.0),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Wrap(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
+                                  ),
+                                  Text(
+                                    "Duration: " +
+                                        storedocs[i]['duration'] +
+                                        " Days",
+                                    //label: " Days",
+                                    style: DefaultTextStyle.of(context)
+                                        .style
+                                        .apply(fontSizeFactor: 1.5),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                        20.0, 0.0, 0.0, 0.0),
+                                  ),
+                                  Icon(
+                                    Icons.attach_money,
+                                    color: Colors.black,
+                                  ),
+                                  Text(
+                                    storedocs[i]['price'] + " Rs",
+                                    style: DefaultTextStyle.of(context)
+                                        .style
+                                        .apply(fontSizeFactor: 1.5),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Text(
-                              "Duaration",
-                              style: DefaultTextStyle.of(context)
-                                  .style
-                                  .apply(fontSizeFactor: 2.0),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Wrap(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
+                                  ),
+                                  Text(
+                                    storedocs[i]['details'],
+                                    style: DefaultTextStyle.of(context)
+                                        .style
+                                        .apply(fontSizeFactor: 1.5),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Text(
-                              "Price",
-                              style: DefaultTextStyle.of(context)
-                                  .style
-                                  .apply(fontSizeFactor: 2.0),
-                            ),
-                            Text(
-                              "Description",
-                              style: DefaultTextStyle.of(context)
-                                  .style
-                                  .apply(fontSizeFactor: 2.0),
-                            ),
+                            Padding(
+                                padding:
+                                    EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0)),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                ElevatedButton(
-                                    onPressed: () {}, child: Text("Update")),
-                                ElevatedButton(
+                                Padding(
+                                  padding:
+                                      EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
+                                ),
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        primary:
+                                            Color.fromARGB(255, 0, 47, 255),
+                                        shape: new RoundedRectangleBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(30.0),
+                                        ),
+                                      ),
+                                      icon: Icon(Icons.edit),
+                                      onPressed: () {},
+                                      label: Text("Update")),
+                                ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+                                ),
+                                ElevatedButton.icon(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Color.fromARGB(255, 255, 0, 0),
+                                      shape: new RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(30.0),
+                                      ),
+                                    ),
+                                    icon: Icon(Icons.delete),
                                     onPressed: () {
                                       deleteUser(storedocs[i]['id']);
                                     },
-                                    child: Text("Delete")),
+                                    label: Text("Delete")),
+                                // child: Text("Delete")),
                               ],
                             )
                           ],

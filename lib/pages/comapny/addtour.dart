@@ -45,6 +45,16 @@ class _AddtourState extends State<Addtour> {
   final titleController = TextEditingController();
   final priceController = TextEditingController();
   final enddateController = TextEditingController();
+  void clear() {
+    dateController.clear();
+    detailsController.clear();
+    durationController.clear();
+    imgUrlController.clear();
+    locationController.clear();
+    titleController.clear();
+    priceController.clear();
+    enddateController.clear();
+  }
 
   Future getImage() async {
     final ImagePicker _picker = ImagePicker();
@@ -84,6 +94,7 @@ class _AddtourState extends State<Addtour> {
     //imgUrl = urlDownload;
     print('Download-Link: $imgUrl');
     addTour();
+    clear();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: Colors.greenAccent,
@@ -102,8 +113,8 @@ class _AddtourState extends State<Addtour> {
         .add({
           'title': title,
           'location': location,
-          'start-date': date,
-          'end-date': enddate,
+          'date': date,
+          'duration': duration,
           'details': details,
           'price': price,
           'email': email,
@@ -228,7 +239,7 @@ class _AddtourState extends State<Addtour> {
                   child: TextFormField(
                     autofocus: false,
                     decoration: InputDecoration(
-                      labelText: 'Start Date: YYYY-MM-DD',
+                      labelText: 'Date: YYYY-MM-DD',
                       labelStyle: TextStyle(fontSize: 20.0),
                       border: OutlineInputBorder(),
                       errorStyle:
@@ -250,18 +261,16 @@ class _AddtourState extends State<Addtour> {
                   child: TextFormField(
                     autofocus: false,
                     decoration: InputDecoration(
-                      labelText: 'End Date: YYYY-MM-DD',
+                      labelText: 'Duration: ',
                       labelStyle: TextStyle(fontSize: 20.0),
                       border: OutlineInputBorder(),
                       errorStyle:
                           TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
-                    controller: enddateController,
+                    controller: durationController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please Enter End Date';
-                      } else if (!value.contains('-')) {
-                        return 'Please Enter Valid Date Format';
+                        return 'Please Enter Duration';
                       }
                       return null;
                     },
@@ -318,7 +327,7 @@ class _AddtourState extends State<Addtour> {
                               title = titleController.text;
                               location = locationController.text;
                               date = dateController.text;
-                              enddate = enddateController.text;
+                              duration = durationController.text;
                               details = detailsController.text;
                               price = priceController.text;
                             });

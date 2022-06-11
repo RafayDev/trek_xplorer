@@ -24,6 +24,7 @@ class _LoginState extends State<Login> {
   var email = "";
   var password = "";
   var isorg = "";
+  bool loading = false;
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final emailController = TextEditingController();
@@ -89,6 +90,9 @@ class _LoginState extends State<Login> {
     }
     // print(isorg);
     userLogin();
+    setState(() {
+      loading = true;
+    });
   }
 
   @override
@@ -177,7 +181,17 @@ class _LoginState extends State<Login> {
                             password = passwordController.text;
                           });
                           // userLogin();
+                          if (loading) {
+                            Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
                           checkorg();
+                          if (loading) {
+                            Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
                           //userLogin();
                         }
                       },
