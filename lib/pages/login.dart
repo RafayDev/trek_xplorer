@@ -88,6 +88,7 @@ class _LoginState extends State<Login> {
       isorg = data['isOrg'];
     }
     // print(isorg);
+    userLogin();
   }
 
   @override
@@ -175,7 +176,7 @@ class _LoginState extends State<Login> {
                             email = emailController.text;
                             password = passwordController.text;
                           });
-                          userLogin();
+                          // userLogin();
                           checkorg();
                           //userLogin();
                         }
