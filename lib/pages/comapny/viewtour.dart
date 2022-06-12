@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:trek_xplorer/pages/comapny/update_tour.dart';
 
 class Viewtour extends StatefulWidget {
   const Viewtour({Key? key}) : super(key: key);
@@ -23,15 +24,22 @@ class _ViewtourState extends State<Viewtour> {
       .snapshots();
 
   // For Deleting Tour
-  CollectionReference students = FirebaseFirestore.instance.collection('tours');
+  CollectionReference tours = FirebaseFirestore.instance.collection('tours');
 
   Future<void> deleteUser(id) {
     // print("User Deleted $id");
-    return students
+    return tours
         .doc(id)
         .delete()
-        .then((value) => print('Tour Deleted'))
-        .catchError((error) => print('Failed to Delete Tour: $error'));
+        .then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(
+                "Tour Deleted Sucessfully",
+                style: TextStyle(fontSize: 20.0),
+              ),
+            )));
+
+    //  .catchError((error) => print('Failed to Delete Tour: $error'));
   }
 
   @override
@@ -54,6 +62,11 @@ class _ViewtourState extends State<Viewtour> {
             storedocs.add(a);
             a['id'] = document.id;
           }).toList();
+          if (storedocs.length == 0) {
+            return Center(
+              child: Text("No Tours Added By You"),
+            );
+          }
           return ListView(
             children: [
               for (var i = 0; i < storedocs.length; i++) ...[
@@ -189,7 +202,15 @@ class _ViewtourState extends State<Viewtour> {
                                         ),
                                       ),
                                       icon: Icon(Icons.edit),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => UpdateTour(
+                                                id: storedocs[i]['id']),
+                                          ),
+                                        );
+                                      },
                                       label: Text("Update")),
                                 ),
                                 Padding(

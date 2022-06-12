@@ -187,7 +187,7 @@ class _LoginState extends State<Login> {
                             );
                           }
                           checkorg();
-                          if (loading) {
+                          if (loading == false) {
                             Center(
                               child: CircularProgressIndicator(),
                             );

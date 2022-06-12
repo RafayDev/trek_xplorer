@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Trek Xplorer',
             theme: ThemeData(
-              primarySwatch: Colors.deepPurple,
+              primarySwatch: Colors.purple,
             ),
             debugShowCheckedModeBanner: false,
             home: Login(),
