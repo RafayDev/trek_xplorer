@@ -23,6 +23,7 @@ class UpdateTour extends StatefulWidget {
 class _UpdateTourState extends State<UpdateTour> {
   File? _image;
   var imgUrl = "";
+  bool isimg = false;
   final _formKey = GlobalKey<FormState>();
 
   // Updaing Tour Details
@@ -35,6 +36,7 @@ class _UpdateTourState extends State<UpdateTour> {
     final imageTemporary = File(image.path);
     setState(() {
       this._image = imageTemporary;
+      isimg = true;
     });
 
     // setState(() {
@@ -65,20 +67,10 @@ class _UpdateTourState extends State<UpdateTour> {
     //imgUrl = urlDownload;
     print('Download-Link: $imgUrl');
     //update_tour();
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.greenAccent,
-        content: Text(
-          "Tour Updated Sucessfully",
-          style: TextStyle(fontSize: 20.0),
-        ),
-      ),
-    );
   }
 
   Future<void> update_tour(
-      id, title, price, date, duration, details, location) async {
+      id, title, price, date, duration, details, location, img) async {
     //uploadPic(context);
     return tours
         .doc(id)
@@ -89,7 +81,7 @@ class _UpdateTourState extends State<UpdateTour> {
           'duration': duration,
           'details': details,
           'location': location,
-          'imgUrl': imgUrl
+          'imgUrl': img
         })
         .then((value) => print('Tour Updated'))
         .catchError((error) => print("Failed to update tour: $error"));
@@ -330,11 +322,38 @@ class _UpdateTourState extends State<UpdateTour> {
                                 // fetchdata();
                                 //  registration();
                                 //  addUser();
+                                if (isimg == true) {
+                                  await uploadPic(context);
 
-                                await uploadPic(context);
-
-                                await update_tour(widget.id, title, price, date,
-                                    duration, details, location);
+                                  await update_tour(
+                                      widget.id,
+                                      title,
+                                      price,
+                                      date,
+                                      duration,
+                                      details,
+                                      location,
+                                      imgUrl);
+                                } else {
+                                  await update_tour(
+                                      widget.id,
+                                      title,
+                                      price,
+                                      date,
+                                      duration,
+                                      details,
+                                      location,
+                                      imgUrl2);
+                                }
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.green,
+                                    content: Text(
+                                      "Tour Updated Sucessfully",
+                                      style: TextStyle(fontSize: 20.0),
+                                    ),
+                                  ),
+                                );
                                 Navigator.pop(context);
                                 // if (imgUrl != "") {
                                 //   addTour();

@@ -179,21 +179,24 @@ class _LoginState extends State<Login> {
                           setState(() {
                             email = emailController.text;
                             password = passwordController.text;
+
+                            if (loading == false) {
+                              Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
                           });
-                          // userLogin();
-                          if (loading) {
-                            Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
                           checkorg();
-                          if (loading == false) {
-                            Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
+                          // userLogin();
+
+                          // if (loading) {
+                          //   Center(
+                          //     child: CircularProgressIndicator(),
+                          //   );
+                          // }
                           //userLogin();
                         }
+                        //checkorg();
                       },
                       child: Text(
                         'Login',
