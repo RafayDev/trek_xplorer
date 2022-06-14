@@ -90,6 +90,19 @@ class _ChangePasswordState extends State<ChangePassword> {
                 style: TextStyle(fontSize: 18.0),
               ),
             ),
+            ElevatedButton(
+              onPressed: () async => {
+                await FirebaseAuth.instance.signOut(),
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Login(),
+                    ),
+                    (route) => false)
+              },
+              child: Text('Logout'),
+              style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+            )
           ],
         ),
       ),

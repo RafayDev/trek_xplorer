@@ -34,19 +34,6 @@ class _UserMainState extends State<UserMain> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("Welcome User"),
-            ElevatedButton(
-              onPressed: () async => {
-                await FirebaseAuth.instance.signOut(),
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Login(),
-                    ),
-                    (route) => false)
-              },
-              child: Text('Logout'),
-              style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-            )
           ],
         ),
       ),
@@ -55,20 +42,24 @@ class _UserMainState extends State<UserMain> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
+            backgroundColor: Colors.purple,
             label: 'Dashboard',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.star),
+            backgroundColor: Colors.purple,
             label: 'Favorites',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
+            backgroundColor: Colors.purple,
             label: 'Change Password',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.red,
+        selectedItemColor: Colors.white,
         onTap: _onItemTapped,
+        backgroundColor: Colors.purple,
       ),
     );
   }
