@@ -20,7 +20,7 @@ class _FavoritesState extends State<Favorites> {
 
   final Stream<QuerySnapshot> favoritesStream = FirebaseFirestore.instance
       .collection('favorites')
-      // .where('email', isEqualTo: "$email")
+      .where('email', isEqualTo: "$email")
       .snapshots();
 
   // For Deleting Tour
@@ -222,7 +222,7 @@ class _FavoritesState extends State<Favorites> {
                                             new BorderRadius.circular(30.0),
                                       ),
                                     ),
-                                    icon: Icon(Icons.heart_broken),
+                                    icon: Icon(Icons.heart_broken_outlined),
                                     onPressed: () async {
                                       deletefavorite(storedocs[i]['id']);
                                     },

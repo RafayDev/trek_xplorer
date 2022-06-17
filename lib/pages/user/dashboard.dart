@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trek_xplorer/pages/comapny/update_tour.dart';
 
 class Dashboard extends StatefulWidget {
@@ -203,7 +205,9 @@ class _DashboardState extends State<Dashboard> {
                                             new BorderRadius.circular(30.0),
                                       ),
                                     ),
-                                    icon: Icon(Icons.star),
+                                    icon: Icon(
+                                      FontAwesomeIcons.heart,
+                                    ),
                                     onPressed: () async {
                                       await addfavorite(
                                           storedocs[i]['title'],
