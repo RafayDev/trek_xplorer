@@ -3,53 +3,72 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trek_xplorer/pages/comapny/update_tour.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+class Favorites extends StatefulWidget {
+  const Favorites({Key? key}) : super(key: key);
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<Favorites> createState() => _FavoritesState();
 }
 
 String? email = FirebaseAuth.instance.currentUser!.email;
 
-class _DashboardState extends State<Dashboard> {
+class _FavoritesState extends State<Favorites> {
   void initState() {
     var email = FirebaseAuth.instance.currentUser!.email;
     super.initState();
   }
 
-  final Stream<QuerySnapshot> tourStream = FirebaseFirestore.instance
-      .collection('tours')
+  final Stream<QuerySnapshot> favoritesStream = FirebaseFirestore.instance
+      .collection('favorites')
       // .where('email', isEqualTo: "$email")
       .snapshots();
 
   // For Deleting Tour
   // CollectionReference favorite =
   //     FirebaseFirestore.instance.collection('favorites');
-  addfavorite(
-      title, imgUrl, location, date, duration, price, details, id) async {
-    CollectionReference favorite =
-        await FirebaseFirestore.instance.collection('favorites');
-    return favorite
+  // addfavorite(
+  //     title, imgUrl, location, date, duration, price, details, id) async {
+  //   CollectionReference favorite =
+  //       await FirebaseFirestore.instance.collection('favorites');
+  //   return favorite
+  //       .doc(id)
+  //       .set({
+  //         'title': title,
+  //         'location': location,
+  //         'date': date,
+  //         'duration': duration,
+  //         'details': details,
+  //         'price': price,
+  //         'email': email,
+  //         'imgUrl': imgUrl,
+  //       })
+  //       .then((value) => print('Tour Added'))
+  //       .catchError((error) => print('Failed to Add Tour: $error'));
+  // }
+  // For Deleting Tour
+  CollectionReference favorites =
+      FirebaseFirestore.instance.collection('favorites');
+
+  Future<void> deletefavorite(id) {
+    // print("User Deleted $id");
+    return favorites
         .doc(id)
-        .set({
-          'title': title,
-          'location': location,
-          'date': date,
-          'duration': duration,
-          'details': details,
-          'price': price,
-          'email': email,
-          'imgUrl': imgUrl,
-        })
-        .then((value) => print('Tour Added'))
-        .catchError((error) => print('Failed to Add Tour: $error'));
+        .delete()
+        .then((value) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(
+                "Deleted from Favorite Sucessfully",
+                style: TextStyle(fontSize: 20.0),
+              ),
+            )));
+
+    //  .catchError((error) => print('Failed to Delete Tour: $error'));
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: tourStream,
+        stream: favoritesStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             print('Something went Wrong');
@@ -68,7 +87,7 @@ class _DashboardState extends State<Dashboard> {
           }).toList();
           if (storedocs.length == 0) {
             return Center(
-              child: Text("No Tours Added By Companies"),
+              child: Text("No Tours Added By You in Favorites"),
             );
           }
           return ListView(
@@ -203,29 +222,11 @@ class _DashboardState extends State<Dashboard> {
                                             new BorderRadius.circular(30.0),
                                       ),
                                     ),
-                                    icon: Icon(Icons.star),
+                                    icon: Icon(Icons.heart_broken),
                                     onPressed: () async {
-                                      await addfavorite(
-                                          storedocs[i]['title'],
-                                          storedocs[i]['imgUrl'],
-                                          storedocs[i]['location'],
-                                          storedocs[i]['date'],
-                                          storedocs[i]['duration'],
-                                          storedocs[i]['price'],
-                                          storedocs[i]['details'],
-                                          storedocs[i]['id']);
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          backgroundColor: Colors.red,
-                                          content: Text(
-                                            "Add to Favorite Sucessfully",
-                                            style: TextStyle(fontSize: 20.0),
-                                          ),
-                                        ),
-                                      );
+                                      deletefavorite(storedocs[i]['id']);
                                     },
-                                    label: Text("Add Favorites")),
+                                    label: Text("Delete Favorite")),
                                 Padding(padding: EdgeInsets.all(10.0)),
                                 ElevatedButton.icon(
                                     style: ElevatedButton.styleFrom(

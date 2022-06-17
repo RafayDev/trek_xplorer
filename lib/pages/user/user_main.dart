@@ -4,6 +4,7 @@ import 'package:trek_xplorer/pages/login.dart';
 
 import 'package:trek_xplorer/pages/user/change_password.dart';
 import 'package:trek_xplorer/pages/user/dashboard.dart';
+import 'package:trek_xplorer/pages/user/favorites.dart';
 import 'package:trek_xplorer/pages/user/profile.dart';
 
 class UserMain extends StatefulWidget {
@@ -17,7 +18,7 @@ class _UserMainState extends State<UserMain> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     Dashboard(),
-    Profile(),
+    Favorites(),
     ChangePassword(),
   ];
   void _onItemTapped(int index) {
