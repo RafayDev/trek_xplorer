@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trek_xplorer/pages/comapny/update_tour.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -20,6 +24,7 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
   }
 
+  var whatsapp = "";
   final Stream<QuerySnapshot> tourStream = FirebaseFirestore.instance
       .collection('tours')
       // .where('email', isEqualTo: "$email")
@@ -46,6 +51,31 @@ class _DashboardState extends State<Dashboard> {
         })
         .then((value) => print('Tour Added'))
         .catchError((error) => print('Failed to Add Tour: $error'));
+  }
+
+  getwhatsapp(company_email) async {
+    var collection = FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: "$company_email");
+    var querySnapshot = await collection.get();
+    for (var queryDocumentSnapshot in querySnapshot.docs) {
+      Map<String, dynamic> data = queryDocumentSnapshot.data();
+      //  var name = data['name'];
+      //  var phone = data['phone'];
+      whatsapp = data['whatsapp'];
+    }
+  }
+
+  openwhatsapp(company_email) async {
+    await getwhatsapp(company_email);
+    final link = WhatsAppUnilink(
+      phoneNumber: whatsapp,
+      text: "Hey! I'm inquiring about the apartment listing",
+    );
+    // Convert the WhatsAppUnilink instance to a string.
+    // Use either Dart's string interpolation or the toString() method.
+    // The "launch" method is part of "url_launcher".
+    await launch('$link');
   }
 
   @override
@@ -242,6 +272,7 @@ class _DashboardState extends State<Dashboard> {
                                     icon: Icon(Icons.whatsapp),
                                     onPressed: () {
                                       // deleteUser(storedocs[i]['id']);
+                                      openwhatsapp(storedocs[i]['email']);
                                     },
                                     label: Text("Contact")),
                                 // child: Text("Delete")),
