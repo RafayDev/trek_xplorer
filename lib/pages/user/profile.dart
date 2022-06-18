@@ -58,15 +58,20 @@ class _ProfileState extends State<Profile> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(
-              FontAwesomeIcons.circleXmark,
-              size: 100,
-              color: Color.fromARGB(255, 223, 31, 18),
+            Wrap(
+              children: [
+                Icon(
+                  FontAwesomeIcons.userXmark,
+                  size: 100,
+                  color: Color.fromARGB(255, 255, 17, 0),
+                ),
+                // Padding(padding: EdgeInsets.fromLTRB(0, 100, 0, 0)),
+              ],
             ),
             Padding(padding: EdgeInsets.all(10)),
             Text(
               'Your Email is not Verfied',
-              style: TextStyle(fontSize: 30.0),
+              style: TextStyle(fontSize: 25.0),
             ),
             Text(
               'Please Verify your Email',

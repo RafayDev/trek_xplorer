@@ -54,10 +54,10 @@ class _DashboardState extends State<Dashboard> {
         .catchError((error) => print('Failed to Add Tour: $error'));
   }
 
-  getwhatsapp(company_email) async {
+  getwhatsapp(email) async {
     var collection = FirebaseFirestore.instance
         .collection('users')
-        .where('email', isEqualTo: "$company_email");
+        .where('email', isEqualTo: "$email");
     var querySnapshot = await collection.get();
     for (var queryDocumentSnapshot in querySnapshot.docs) {
       Map<String, dynamic> data = queryDocumentSnapshot.data();
