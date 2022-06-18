@@ -10,6 +10,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:path/path.dart';
 import 'dart:io';
+import 'package:intl/intl.dart';
 import '../../api/firebase_api.dart';
 
 class UpdateTour extends StatefulWidget {
@@ -228,7 +229,6 @@ class _UpdateTourState extends State<UpdateTour> {
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
-                        initialValue: date,
                         autofocus: false,
                         onChanged: (value) => date = value,
                         decoration: InputDecoration(
@@ -238,6 +238,33 @@ class _UpdateTourState extends State<UpdateTour> {
                           errorStyle:
                               TextStyle(color: Colors.redAccent, fontSize: 15),
                         ),
+                        // onTap: () async {
+                        //   DateTime? pickedDate = await showDatePicker(
+                        //       context: context,
+                        //       initialDate: DateTime.now(),
+                        //       firstDate: DateTime(
+                        //           2000), //DateTime.now() - not to allow to choose before today.
+                        //       lastDate: DateTime(2101));
+
+                        //   if (pickedDate != null) {
+                        //     print(
+                        //         pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                        //     String formattedDate =
+                        //         DateFormat('yyyy-MM-dd').format(pickedDate);
+                        //     print(
+                        //         formattedDate); //formatted date output using intl package =>  2021-03-16
+                        //     //you can implement different kind of Date Format here according to your requirement
+
+                        //     setState(() {
+                        //       date = formattedDate;
+                        //       context = pickedDate as BuildContext;
+                        //     });
+                        //   } else {
+                        //     print("Date is not selected");
+                        //   }
+                        // },
+                        initialValue: date,
+                        //  readOnly: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please Enter Date';
@@ -322,6 +349,30 @@ class _UpdateTourState extends State<UpdateTour> {
                                 // fetchdata();
                                 //  registration();
                                 //  addUser();
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  backgroundColor: Colors.white,
+                                  content: Center(
+                                    child: Column(
+                                      children: [
+                                        Padding(padding: EdgeInsets.all(200.0)),
+                                        Center(
+                                          child: CircularProgressIndicator(
+                                            backgroundColor: Colors.purple,
+                                          ),
+                                        ),
+                                        Padding(padding: EdgeInsets.all(10.0)),
+                                        Text(
+                                          "Please Wait...",
+                                          style: TextStyle(
+                                            fontSize: 20.0,
+                                            color: Colors.purple,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ));
                                 if (isimg == true) {
                                   await uploadPic(context);
 
