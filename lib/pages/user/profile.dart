@@ -58,34 +58,46 @@ class _ProfileState extends State<Profile> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Wrap(
-              children: [
-                Icon(
-                  FontAwesomeIcons.userXmark,
-                  size: 100,
-                  color: Color.fromARGB(255, 255, 17, 0),
+            Container(
+              height: 380,
+              width: 380,
+              child: Card(
+                color: Color.fromARGB(224, 247, 192, 237),
+                child: Column(
+                  children: [
+                    Padding(padding: EdgeInsets.all(30)),
+                    Icon(
+                      FontAwesomeIcons.userXmark,
+                      size: 100,
+                      color: Color.fromARGB(255, 255, 17, 0),
+                    ),
+                    // Text(
+                    //   '🚫',
+                    //   style: TextStyle(fontSize: 100.0),
+                    // ),
+                    Padding(padding: EdgeInsets.all(10)),
+                    Text(
+                      'Your Email is not Verfied',
+                      style: TextStyle(fontSize: 25.0),
+                    ),
+                    Text(
+                      'Please Verify your Email',
+                      style: TextStyle(fontSize: 25.0),
+                    ),
+                    Padding(padding: EdgeInsets.all(10)),
+                    ElevatedButton.icon(
+                      icon: Icon(Icons.verified_user),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.green,
+                      ),
+                      onPressed: () => verifyEmail(),
+                      label: Text('Verify Email'),
+                    ),
+                  ],
                 ),
-                // Padding(padding: EdgeInsets.fromLTRB(0, 100, 0, 0)),
-              ],
-            ),
-            Padding(padding: EdgeInsets.all(10)),
-            Text(
-              'Your Email is not Verfied',
-              style: TextStyle(fontSize: 25.0),
-            ),
-            Text(
-              'Please Verify your Email',
-              style: TextStyle(fontSize: 25.0),
-            ),
-            Padding(padding: EdgeInsets.all(10)),
-            ElevatedButton.icon(
-              icon: Icon(Icons.verified_user),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.green,
               ),
-              onPressed: () => verifyEmail(),
-              label: Text('Verify Email'),
             ),
+            // Padding(padding: EdgeInsets.fromLTRB(0, 100, 0, 0)),
           ],
         ),
       ),
