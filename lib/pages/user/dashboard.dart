@@ -70,7 +70,7 @@ class _DashboardState extends State<Dashboard> {
     await getwhatsapp(company_email);
     final link = WhatsAppUnilink(
       phoneNumber: whatsapp,
-      text: "Hey! I'm inquiring about the apartment listing",
+      text: "Hey! I'm inquiring about the tour listing",
     );
     // Convert the WhatsAppUnilink instance to a string.
     // Use either Dart's string interpolation or the toString() method.
