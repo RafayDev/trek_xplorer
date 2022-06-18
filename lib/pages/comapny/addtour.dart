@@ -12,6 +12,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'dart:io';
 
+import 'package:intl/intl.dart';
+
 import '../../api/firebase_api.dart';
 
 class Addtour extends StatefulWidget {
@@ -54,6 +56,11 @@ class _AddtourState extends State<Addtour> {
     titleController.clear();
     priceController.clear();
     enddateController.clear();
+  }
+
+  void initState() {
+    super.initState();
+    //getImage();
   }
 
   Future getImage() async {
@@ -246,6 +253,32 @@ class _AddtourState extends State<Addtour> {
                           TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
                     controller: dateController,
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(
+                              2000), //DateTime.now() - not to allow to choose before today.
+                          lastDate: DateTime(2101));
+
+                      if (pickedDate != null) {
+                        print(
+                            pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                        String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                        print(
+                            formattedDate); //formatted date output using intl package =>  2021-03-16
+                        //you can implement different kind of Date Format here according to your requirement
+
+                        setState(() {
+                          dateController.text =
+                              formattedDate; //set output date to TextField value.
+                        });
+                      } else {
+                        print("Date is not selected");
+                      }
+                    },
+                    readOnly: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please Enter Date';
@@ -321,7 +354,7 @@ class _AddtourState extends State<Addtour> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             setState(() {
                               title = titleController.text;
@@ -336,7 +369,8 @@ class _AddtourState extends State<Addtour> {
                             //  registration();
                             //  addUser();
 
-                            uploadPic(context);
+                            await uploadPic(context);
+                            // initState();
                             // if (imgUrl != "") {
                             //   addTour();
                             // }
