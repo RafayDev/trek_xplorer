@@ -34,7 +34,7 @@ class _UserMainState extends State<UserMain> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Welcome User"),
+            Text("Welcome to TrekXplorer"),
           ],
         ),
       ),

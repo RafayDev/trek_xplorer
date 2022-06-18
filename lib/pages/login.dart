@@ -5,6 +5,7 @@ import 'package:trek_xplorer/pages/comapny/company_main.dart';
 
 import 'package:trek_xplorer/pages/signup.dart';
 import 'package:trek_xplorer/pages/csignup.dart';
+import 'package:trek_xplorer/pages/user/profile.dart';
 import 'package:trek_xplorer/pages/user/user_main.dart';
 
 import 'forgot_password.dart';
@@ -24,7 +25,9 @@ class _LoginState extends State<Login> {
   var email = "";
   var password = "";
   var isorg = "";
+  var verify = "";
   bool loading = false;
+
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final emailController = TextEditingController();
@@ -34,19 +37,28 @@ class _LoginState extends State<Login> {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-
-      if (isorg == "Yes") {
+      User? user = FirebaseAuth.instance.currentUser;
+      await checkverfiy(user);
+      print("$verify");
+      if (isorg == "Yes" && verify == "Yes") {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => CompanyMain(),
           ),
         );
-      } else if (isorg == "No") {
+      } else if (isorg == "No" && verify == "Yes") {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => UserMain(),
+          ),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Profile(),
           ),
         );
       }
@@ -75,6 +87,10 @@ class _LoginState extends State<Login> {
         );
       }
     }
+  }
+
+  checkverfiy(user) {
+    user!.emailVerified ? verify = "Yes" : verify = "No";
   }
 
   checkorg() async {
@@ -179,13 +195,30 @@ class _LoginState extends State<Login> {
                           setState(() {
                             email = emailController.text;
                             password = passwordController.text;
-
-                            if (loading == false) {
-                              Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
                           });
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            backgroundColor: Colors.white,
+                            content: Center(
+                              child: Column(
+                                children: [
+                                  Padding(padding: EdgeInsets.all(200.0)),
+                                  Center(
+                                    child: CircularProgressIndicator(
+                                      backgroundColor: Colors.purple,
+                                    ),
+                                  ),
+                                  Padding(padding: EdgeInsets.all(10.0)),
+                                  Text(
+                                    "Please Wait...",
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                      color: Colors.purple,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ));
                           checkorg();
                           // userLogin();
 
