@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trek_xplorer/pages/comapny/update_tour.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 class Favorites extends StatefulWidget {
   const Favorites({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class _FavoritesState extends State<Favorites> {
     super.initState();
   }
 
+  var whatsapp = "";
   final Stream<QuerySnapshot> favoritesStream = FirebaseFirestore.instance
       .collection('favorites')
       .where('email', isEqualTo: "$email")
@@ -63,6 +66,31 @@ class _FavoritesState extends State<Favorites> {
             )));
 
     //  .catchError((error) => print('Failed to Delete Tour: $error'));
+  }
+
+  getwhatsapp(company_email) async {
+    var collection = FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: "$company_email");
+    var querySnapshot = await collection.get();
+    for (var queryDocumentSnapshot in querySnapshot.docs) {
+      Map<String, dynamic> data = queryDocumentSnapshot.data();
+      //  var name = data['name'];
+      //  var phone = data['phone'];
+      whatsapp = data['whatsapp'];
+    }
+  }
+
+  openwhatsapp(company_email) async {
+    await getwhatsapp(company_email);
+    final link = WhatsAppUnilink(
+      phoneNumber: whatsapp,
+      text: "Hey! I'm inquiring about the tour listing",
+    );
+    // Convert the WhatsAppUnilink instance to a string.
+    // Use either Dart's string interpolation or the toString() method.
+    // The "launch" method is part of "url_launcher".
+    await launch('$link');
   }
 
   @override
@@ -239,6 +267,8 @@ class _FavoritesState extends State<Favorites> {
                                     icon: Icon(Icons.whatsapp),
                                     onPressed: () {
                                       // deleteUser(storedocs[i]['id']);
+                                      openwhatsapp(
+                                          storedocs[i]['company_email']);
                                     },
                                     label: Text("Contact")),
                                 // child: Text("Delete")),

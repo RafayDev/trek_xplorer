@@ -33,8 +33,8 @@ class _DashboardState extends State<Dashboard> {
   // For Deleting Tour
   // CollectionReference favorite =
   //     FirebaseFirestore.instance.collection('favorites');
-  addfavorite(
-      title, imgUrl, location, date, duration, price, details, id) async {
+  addfavorite(title, imgUrl, location, date, duration, price, details, id,
+      company_email) async {
     CollectionReference favorite =
         await FirebaseFirestore.instance.collection('favorites');
     return favorite
@@ -48,6 +48,7 @@ class _DashboardState extends State<Dashboard> {
           'price': price,
           'email': email,
           'imgUrl': imgUrl,
+          'company_email': company_email,
         })
         .then((value) => print('Tour Added'))
         .catchError((error) => print('Failed to Add Tour: $error'));
@@ -247,7 +248,9 @@ class _DashboardState extends State<Dashboard> {
                                           storedocs[i]['duration'],
                                           storedocs[i]['price'],
                                           storedocs[i]['details'],
-                                          storedocs[i]['id']);
+                                          storedocs[i]['id'],
+                                          storedocs[i]['email']);
+
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
