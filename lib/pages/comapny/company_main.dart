@@ -36,7 +36,7 @@ class _CompanyMainState extends State<CompanyMain> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Welcome Company"),
+            Text("Welcome to TrekXplorer"),
           ],
         ),
       ),

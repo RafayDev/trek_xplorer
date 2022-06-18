@@ -293,6 +293,7 @@ class _AddtourState extends State<Addtour> {
                   margin: EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
                     autofocus: false,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: 'Duration: ',
                       labelStyle: TextStyle(fontSize: 20.0),
@@ -333,6 +334,7 @@ class _AddtourState extends State<Addtour> {
                   margin: EdgeInsets.symmetric(vertical: 10.0),
                   child: TextFormField(
                     autofocus: false,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: 'Price: ',
                       labelStyle: TextStyle(fontSize: 20.0),

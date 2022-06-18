@@ -26,7 +26,7 @@ class _UpdateTourState extends State<UpdateTour> {
   var imgUrl = "";
   bool isimg = false;
   final _formKey = GlobalKey<FormState>();
-
+  var dateController = TextEditingController();
   // Updaing Tour Details
   CollectionReference tours = FirebaseFirestore.instance.collection('tours');
   Future getImage() async {
@@ -115,10 +115,12 @@ class _UpdateTourState extends State<UpdateTour> {
               var title = data!['title'];
               var price = data['price'];
               var date = data['date'];
+              // dateController.text = data['date'];
               var duration = data['duration'];
               var details = data['details'];
               var location = data['location'];
               var imgUrl2 = data['imgUrl'];
+              //  var datepicker = "";
               return Padding(
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                 child: ListView(
@@ -230,7 +232,6 @@ class _UpdateTourState extends State<UpdateTour> {
                       margin: EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
                         autofocus: false,
-                        onChanged: (value) => date = value,
                         decoration: InputDecoration(
                           labelText: 'Date: YYYY-MM-DD',
                           labelStyle: TextStyle(fontSize: 20.0),
@@ -238,6 +239,7 @@ class _UpdateTourState extends State<UpdateTour> {
                           errorStyle:
                               TextStyle(color: Colors.redAccent, fontSize: 15),
                         ),
+                        // controller: dateController,
                         // onTap: () async {
                         //   DateTime? pickedDate = await showDatePicker(
                         //       context: context,
@@ -256,15 +258,18 @@ class _UpdateTourState extends State<UpdateTour> {
                         //     //you can implement different kind of Date Format here according to your requirement
 
                         //     setState(() {
-                        //       date = formattedDate;
-                        //       context = pickedDate as BuildContext;
+                        //       dateController.text = "";
+                        //       dateController.text = formattedDate;
+                        //       //print(date);
+                        //       //context = pickedDate as BuildContext;
                         //     });
                         //   } else {
                         //     print("Date is not selected");
                         //   }
                         // },
                         initialValue: date,
-                        //  readOnly: true,
+                        onChanged: (value) => date = value,
+                        // readOnly: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please Enter Date';
@@ -279,6 +284,7 @@ class _UpdateTourState extends State<UpdateTour> {
                       margin: EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
                         initialValue: duration,
+                        keyboardType: TextInputType.number,
                         autofocus: false,
                         onChanged: (value) => duration = value,
                         decoration: InputDecoration(
@@ -321,6 +327,7 @@ class _UpdateTourState extends State<UpdateTour> {
                       margin: EdgeInsets.symmetric(vertical: 10.0),
                       child: TextFormField(
                         initialValue: price,
+                        keyboardType: TextInputType.number,
                         autofocus: false,
                         onChanged: (value) => price = value,
                         decoration: InputDecoration(
