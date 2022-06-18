@@ -61,8 +61,9 @@ class _ProfileState extends State<Profile> {
             Icon(
               FontAwesomeIcons.circleXmark,
               size: 100,
-              color: Colors.red,
+              color: Color.fromARGB(255, 223, 31, 18),
             ),
+            Padding(padding: EdgeInsets.all(10)),
             Text(
               'Your Email is not Verfied',
               style: TextStyle(fontSize: 30.0),
@@ -71,8 +72,12 @@ class _ProfileState extends State<Profile> {
               'Please Verify your Email',
               style: TextStyle(fontSize: 25.0),
             ),
+            Padding(padding: EdgeInsets.all(10)),
             ElevatedButton.icon(
               icon: Icon(Icons.verified_user),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green,
+              ),
               onPressed: () => verifyEmail(),
               label: Text('Verify Email'),
             ),
