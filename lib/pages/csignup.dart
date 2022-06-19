@@ -345,6 +345,29 @@ class _CsignupState extends State<Csignup> {
                             insta = instaController.text;
                             whatsapp = whatsappController.text;
                           });
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            backgroundColor: Colors.white,
+                            content: Center(
+                              child: Column(
+                                children: [
+                                  Padding(padding: EdgeInsets.all(200.0)),
+                                  Center(
+                                    child: CircularProgressIndicator(
+                                      backgroundColor: Colors.purple,
+                                    ),
+                                  ),
+                                  Padding(padding: EdgeInsets.all(10.0)),
+                                  Text(
+                                    "Please Wait...",
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                      color: Colors.purple,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ));
                           // registration();
                           fetchdata();
                           registration();
