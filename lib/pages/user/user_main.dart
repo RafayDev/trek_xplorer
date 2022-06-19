@@ -21,6 +21,7 @@ class _UserMainState extends State<UserMain> {
   var durationfilter = "";
   var pricefilter = "";
   var locationfilter = "";
+  var wantfilter = "";
   //controllers
   final durationfilterController = TextEditingController();
   final pricefilterController = TextEditingController();
