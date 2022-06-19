@@ -6,6 +6,7 @@ import 'package:trek_xplorer/pages/login.dart';
 import 'package:trek_xplorer/pages/user/change_password.dart';
 import 'package:trek_xplorer/pages/user/dashboard.dart';
 import 'package:trek_xplorer/pages/user/favorites.dart';
+import 'package:trek_xplorer/pages/user/filter.dart';
 import 'package:trek_xplorer/pages/user/profile.dart';
 
 class UserMain extends StatefulWidget {
@@ -17,6 +18,13 @@ class UserMain extends StatefulWidget {
 
 class _UserMainState extends State<UserMain> {
   int _selectedIndex = 0;
+  var durationfilter = "";
+  var pricefilter = "";
+  var locationfilter = "";
+  //controllers
+  final durationfilterController = TextEditingController();
+  final pricefilterController = TextEditingController();
+  final locationfilterController = TextEditingController();
   static List<Widget> _widgetOptions = <Widget>[
     Dashboard(),
     Favorites(),
@@ -57,6 +65,7 @@ class _UserMainState extends State<UserMain> {
                               TextFormField(
                                 autofocus: false,
                                 keyboardType: TextInputType.number,
+                                controller: pricefilterController,
                                 decoration: InputDecoration(
                                   labelText: 'Price: ',
                                   labelStyle: TextStyle(fontSize: 20.0),
@@ -70,6 +79,7 @@ class _UserMainState extends State<UserMain> {
                               TextFormField(
                                 autofocus: false,
                                 keyboardType: TextInputType.number,
+                                controller: durationfilterController,
                                 decoration: InputDecoration(
                                   labelText: 'Duration: ',
                                   labelStyle: TextStyle(fontSize: 20.0),
@@ -82,7 +92,9 @@ class _UserMainState extends State<UserMain> {
                               ),
                               TextFormField(
                                 autofocus: false,
+
                                 //  keyboardType: TextInputType.number,
+                                controller: locationfilterController,
                                 decoration: InputDecoration(
                                   labelText: 'Location: ',
                                   labelStyle: TextStyle(fontSize: 20.0),
@@ -94,7 +106,24 @@ class _UserMainState extends State<UserMain> {
                                 //controller: priceController,
                               ),
                               ElevatedButton.icon(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(() {
+                                      pricefilter = pricefilterController.text;
+                                      durationfilter =
+                                          durationfilterController.text;
+                                      locationfilter =
+                                          locationfilterController.text;
+                                    });
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Filter(
+                                            price: pricefilter,
+                                            duration: durationfilter,
+                                            location: locationfilter),
+                                      ),
+                                    );
+                                  },
                                   icon: Icon(Icons.filter_list_alt),
                                   style: ElevatedButton.styleFrom(
                                       primary: Colors.blue),
