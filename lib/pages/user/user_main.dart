@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trek_xplorer/pages/login.dart';
 
 import 'package:trek_xplorer/pages/user/change_password.dart';
@@ -31,6 +32,80 @@ class _UserMainState extends State<UserMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(FontAwesomeIcons.filter),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return Dialog(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        elevation: 16,
+                        child: Container(
+                          height: 300,
+                          width: 1200,
+                          child: Column(
+                            children: <Widget>[
+                              Icon(Icons.filter_list),
+                              Text(
+                                "Filter",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              TextFormField(
+                                autofocus: false,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: 'Price: ',
+                                  labelStyle: TextStyle(fontSize: 20.0),
+                                  // border: OutlineInputBorder(),
+                                  icon: Icon(Icons.attach_money),
+                                  errorStyle: TextStyle(
+                                      color: Colors.redAccent, fontSize: 10),
+                                ),
+                                //controller: priceController,
+                              ),
+                              TextFormField(
+                                autofocus: false,
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: 'Duration: ',
+                                  labelStyle: TextStyle(fontSize: 20.0),
+                                  // border: OutlineInputBorder(),
+                                  icon: Icon(Icons.timer),
+                                  errorStyle: TextStyle(
+                                      color: Colors.redAccent, fontSize: 10),
+                                ),
+                                //controller: priceController,
+                              ),
+                              TextFormField(
+                                autofocus: false,
+                                //  keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: 'Location: ',
+                                  labelStyle: TextStyle(fontSize: 20.0),
+                                  // border: OutlineInputBorder(),
+                                  icon: Icon(Icons.place),
+                                  errorStyle: TextStyle(
+                                      color: Colors.redAccent, fontSize: 10),
+                                ),
+                                //controller: priceController,
+                              ),
+                              ElevatedButton.icon(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.filter_list_alt),
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.blue),
+                                  label: Text("Filter"))
+                            ],
+                          ),
+                        ));
+                  });
+            },
+          ),
+        ],
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
