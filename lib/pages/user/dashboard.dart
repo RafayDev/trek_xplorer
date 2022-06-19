@@ -6,8 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:trek_xplorer/pages/comapny/update_tour.dart';
+import 'package:trek_xplorer/pages/user/locationfilter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+
+import 'filter.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -25,6 +28,14 @@ class _DashboardState extends State<Dashboard> {
   }
 
   var whatsapp = "";
+  var durationfilter = "";
+  var pricefilter = "";
+  var locationfilter = "";
+  var wantfilter = "";
+  //controllers
+  final durationfilterController = TextEditingController();
+  final pricefilterController = TextEditingController();
+  final locationfilterController = TextEditingController();
   final Stream<QuerySnapshot> tourStream = FirebaseFirestore.instance
       .collection('tours')
       // .where('email', isEqualTo: "$email")
@@ -106,6 +117,146 @@ class _DashboardState extends State<Dashboard> {
           }
           return ListView(
             children: [
+              Wrap(
+                children: [
+                  Padding(padding: EdgeInsets.all(10)),
+                  ElevatedButton.icon(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  elevation: 16,
+                                  child: Container(
+                                    height: 200,
+                                    width: 1200,
+                                    child: Column(
+                                      children: <Widget>[
+                                        Icon(Icons.filter_list),
+                                        Text(
+                                          "Price Filter",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        TextFormField(
+                                          autofocus: false,
+                                          keyboardType: TextInputType.number,
+                                          controller: pricefilterController,
+                                          decoration: InputDecoration(
+                                            labelText: 'Price: ',
+                                            labelStyle:
+                                                TextStyle(fontSize: 20.0),
+                                            // border: OutlineInputBorder(),
+                                            icon: Icon(Icons.attach_money),
+                                            errorStyle: TextStyle(
+                                                color: Colors.redAccent,
+                                                fontSize: 10),
+                                          ),
+                                          //controller: priceController,
+                                        ),
+                                        ElevatedButton.icon(
+                                            onPressed: () {
+                                              setState(() {
+                                                pricefilter =
+                                                    pricefilterController.text;
+                                              });
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => Filter(
+                                                      price: pricefilter,
+                                                      duration: durationfilter,
+                                                      location: locationfilter),
+                                                ),
+                                              );
+                                            },
+                                            icon: Icon(Icons.filter_list_alt),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.blue),
+                                            label: Text("Filter"))
+                                      ],
+                                    ),
+                                  ));
+                            });
+                      },
+                      icon: Icon(Icons.filter_alt),
+                      label: Text("Price")),
+                  Padding(padding: EdgeInsets.all(10)),
+                  ElevatedButton.icon(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  elevation: 16,
+                                  child: Container(
+                                    height: 200,
+                                    width: 1200,
+                                    child: Column(
+                                      children: <Widget>[
+                                        Icon(Icons.filter_list),
+                                        Text(
+                                          "Location Filter",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        TextFormField(
+                                          autofocus: false,
+                                          // keyboardType: TextInputType.number,
+                                          controller: locationfilterController,
+                                          decoration: InputDecoration(
+                                            labelText: 'Location: ',
+                                            labelStyle:
+                                                TextStyle(fontSize: 20.0),
+                                            // border: OutlineInputBorder(),
+                                            icon: Icon(Icons.place),
+                                            errorStyle: TextStyle(
+                                                color: Colors.redAccent,
+                                                fontSize: 10),
+                                          ),
+                                          //controller: priceController,
+                                        ),
+                                        ElevatedButton.icon(
+                                            onPressed: () {
+                                              setState(() {
+                                                locationfilter =
+                                                    locationfilterController
+                                                        .text;
+                                              });
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => FilterL(
+                                                      price: pricefilter,
+                                                      duration: durationfilter,
+                                                      location: locationfilter),
+                                                ),
+                                              );
+                                            },
+                                            icon: Icon(Icons.filter_list_alt),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.blue),
+                                            label: Text("Filter"))
+                                      ],
+                                    ),
+                                  ));
+                            });
+                      },
+                      icon: Icon(Icons.filter_alt),
+                      label: Text("Location")),
+                  Padding(padding: EdgeInsets.all(10)),
+                  ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.filter_alt),
+                      label: Text("Duration")),
+                ],
+              ),
               for (var i = 0; i < storedocs.length; i++) ...[
                 Container(
                   height: 380,
