@@ -122,6 +122,7 @@ class _SignupState extends State<Signup> {
     return Scaffold(
       appBar: AppBar(
         title: Text("User Signup"),
+        centerTitle: true,
       ),
       body: Form(
         key: _formKey,

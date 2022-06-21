@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trek_xplorer/pages/comapny/company_main.dart';
 import 'package:trek_xplorer/pages/login.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:trek_xplorer/pages/splashscreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.purple,
             ),
             debugShowCheckedModeBanner: false,
-            home: Login(),
+            home: SplashScreen(),
           );
         });
   }

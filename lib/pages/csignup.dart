@@ -170,7 +170,9 @@ class _CsignupState extends State<Csignup> {
                   decoration: InputDecoration(
                     labelText: 'Company Name: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -190,7 +192,9 @@ class _CsignupState extends State<Csignup> {
                   decoration: InputDecoration(
                     labelText: 'DTS Number: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -210,7 +214,9 @@ class _CsignupState extends State<Csignup> {
                   decoration: InputDecoration(
                     labelText: 'Email: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -232,7 +238,9 @@ class _CsignupState extends State<Csignup> {
                   decoration: InputDecoration(
                     labelText: 'Webiste Url: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -252,7 +260,9 @@ class _CsignupState extends State<Csignup> {
                   decoration: InputDecoration(
                     labelText: 'Instagram Username: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -272,7 +282,9 @@ class _CsignupState extends State<Csignup> {
                   decoration: InputDecoration(
                     labelText: 'Whatsapp No.: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -293,7 +305,9 @@ class _CsignupState extends State<Csignup> {
                   decoration: InputDecoration(
                     labelText: 'Password: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -314,7 +328,9 @@ class _CsignupState extends State<Csignup> {
                   decoration: InputDecoration(
                     labelText: 'Confirm Password: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
