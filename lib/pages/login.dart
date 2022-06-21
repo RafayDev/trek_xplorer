@@ -276,7 +276,7 @@ class _LoginState extends State<Login> {
                               pageBuilder: (context, a, b) => Signup(),
                               transitionDuration: Duration(seconds: 0),
                             ),
-                            (route) => false)
+                            (route) => true)
                       },
                       child: Text('Users Signup'),
                     ),
@@ -296,7 +296,7 @@ class _LoginState extends State<Login> {
                               pageBuilder: (context, a, b) => Csignup(),
                               transitionDuration: Duration(seconds: 0),
                             ),
-                            (route) => false)
+                            (route) => true)
                       },
                       child: Text('Register Company'),
                     ),

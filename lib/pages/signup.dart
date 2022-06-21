@@ -127,9 +127,20 @@ class _SignupState extends State<Signup> {
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+          padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
           child: ListView(
             children: [
+              Image.asset(
+                'images/Logo.png',
+                height: 250,
+                width: 250,
+              ),
+              Text("Signup:",
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.purple)),
+              // Padding(padding: EdgeInsets.only(top: 20)),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
@@ -254,7 +265,7 @@ class _SignupState extends State<Signup> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(padding: EdgeInsets.only(top: 300.0)),
+                    // Padding(padding: EdgeInsets.only(top: 300.0)),
                     Text(
                       "Already have an Account? ",
                       style: TextStyle(

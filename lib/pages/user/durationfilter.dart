@@ -37,6 +37,7 @@ class _FilterDState extends State<FilterD> {
       fduration = widget.duration;
       flocation = widget.location;
     });
+
     super.initState();
   }
 

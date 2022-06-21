@@ -31,13 +31,14 @@ var flocation = "";
 
 class _FilterState extends State<Filter> {
   void initState() {
+    super.initState();
     var email = FirebaseAuth.instance.currentUser!.email;
     setState(() {
+      //  super.initState();
       fprice = widget.price;
       fduration = widget.duration;
       flocation = widget.location;
     });
-    super.initState();
   }
 
   var whatsapp = "";
