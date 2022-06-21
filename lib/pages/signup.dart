@@ -136,7 +136,9 @@ class _SignupState extends State<Signup> {
                   decoration: InputDecoration(
                     labelText: 'Full Name: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -156,7 +158,9 @@ class _SignupState extends State<Signup> {
                   decoration: InputDecoration(
                     labelText: 'Email: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -179,7 +183,9 @@ class _SignupState extends State<Signup> {
                   decoration: InputDecoration(
                     labelText: 'Password: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -200,7 +206,9 @@ class _SignupState extends State<Signup> {
                   decoration: InputDecoration(
                     labelText: 'Confirm Password: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -213,6 +221,7 @@ class _SignupState extends State<Signup> {
                   },
                 ),
               ),
+              Padding(padding: EdgeInsets.only(top: 20.0)),
               Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -244,7 +253,13 @@ class _SignupState extends State<Signup> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already have an Account? "),
+                    Padding(padding: EdgeInsets.only(top: 300.0)),
+                    Text(
+                      "Already have an Account? ",
+                      style: TextStyle(
+                        fontSize: 15.0,
+                      ),
+                    ),
                     TextButton(
                         onPressed: () => {
                               Navigator.pushReplacement(
@@ -257,7 +272,13 @@ class _SignupState extends State<Signup> {
                                 ),
                               )
                             },
-                        child: Text('Login'))
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.purple,
+                          ),
+                        ))
                   ],
                 ),
               )

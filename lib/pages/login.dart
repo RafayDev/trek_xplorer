@@ -147,7 +147,9 @@ class _LoginState extends State<Login> {
                   decoration: InputDecoration(
                     labelText: 'Email: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -170,7 +172,9 @@ class _LoginState extends State<Login> {
                   decoration: InputDecoration(
                     labelText: 'Password: ',
                     labelStyle: TextStyle(fontSize: 20.0),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
@@ -231,6 +235,12 @@ class _LoginState extends State<Login> {
                         }
                         //checkorg();
                       },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.purple,
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(20.0),
+                        ),
+                      ),
                       child: Text(
                         'Login',
                         style: TextStyle(fontSize: 18.0),
