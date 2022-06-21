@@ -13,6 +13,7 @@ class Cdashboard extends StatefulWidget {
 // email = "";
 var name = "";
 int count = 0;
+var dts = "";
 
 class _CdashboardState extends State<Cdashboard> {
   void initState() {
@@ -52,6 +53,7 @@ class _CdashboardState extends State<Cdashboard> {
       //  var name = data['name'];
       //  var phone = data['phone'];
       name = data['name'];
+      dts = data['DtsNo'];
     }
   }
 
@@ -123,7 +125,7 @@ class _CdashboardState extends State<Cdashboard> {
                                     children: [
                                       Padding(padding: EdgeInsets.all(10)),
                                       Text(
-                                        'Tour Count',
+                                        'DTS No.',
                                         style: TextStyle(
                                             fontSize: 35.0,
                                             fontWeight: FontWeight.bold),
@@ -135,7 +137,7 @@ class _CdashboardState extends State<Cdashboard> {
                               ],
                             ),
                             Text(
-                              "$count",
+                              "$dts",
                               style: TextStyle(
                                   fontSize: 35.0, fontWeight: FontWeight.bold),
                             ),

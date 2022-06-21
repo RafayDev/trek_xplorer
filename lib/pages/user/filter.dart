@@ -32,10 +32,12 @@ var flocation = "";
 class _FilterState extends State<Filter> {
   void initState() {
     var email = FirebaseAuth.instance.currentUser!.email;
+    setState(() {
+      fprice = widget.price;
+      fduration = widget.duration;
+      flocation = widget.location;
+    });
     super.initState();
-    fprice = widget.price;
-    fduration = widget.duration;
-    flocation = widget.location;
   }
 
   var whatsapp = "";

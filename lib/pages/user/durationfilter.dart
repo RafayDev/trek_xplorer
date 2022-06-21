@@ -9,11 +9,11 @@ import 'package:trek_xplorer/pages/comapny/update_tour.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
-class FilterL extends StatefulWidget {
+class FilterD extends StatefulWidget {
   final String price;
   final String duration;
   final String location;
-  const FilterL(
+  const FilterD(
       {Key? key,
       required this.price,
       required this.duration,
@@ -21,7 +21,7 @@ class FilterL extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<FilterL> createState() => _FilterLState();
+  State<FilterD> createState() => _FilterDState();
 }
 
 String? email = FirebaseAuth.instance.currentUser!.email;
@@ -29,7 +29,7 @@ var fprice = "";
 var fduration = "";
 var flocation = "";
 
-class _FilterLState extends State<FilterL> {
+class _FilterDState extends State<FilterD> {
   void initState() {
     var email = FirebaseAuth.instance.currentUser!.email;
     setState(() {
@@ -44,9 +44,9 @@ class _FilterLState extends State<FilterL> {
   final Stream<QuerySnapshot> tourStream = FirebaseFirestore.instance
       .collection('tours')
       // .where('price', isLessThanOrEqualTo: '$fprice')
-      .where('location', isEqualTo: "$flocation")
+      //  .where('location', isEqualTo: "$flocation")
       //.orderBy(field)
-      // .where('duration', isLessThan: '$fduration')
+      .where('duration', isLessThanOrEqualTo: '$fduration')
       //.where('email', isEqualTo: 'test4@test.com')
       .snapshots();
   // Future Steam<QuerySnapshot> tourStream() async{}

@@ -10,6 +10,7 @@ import 'package:trek_xplorer/pages/user/locationfilter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
+import 'durationfilter.dart';
 import 'filter.dart';
 
 class Dashboard extends StatefulWidget {
@@ -252,7 +253,68 @@ class _DashboardState extends State<Dashboard> {
                       label: Text("Location")),
                   Padding(padding: EdgeInsets.all(10)),
                   ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  elevation: 16,
+                                  child: Container(
+                                    height: 200,
+                                    width: 1200,
+                                    child: Column(
+                                      children: <Widget>[
+                                        Icon(Icons.filter_list),
+                                        Text(
+                                          "Duration Filter",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        TextFormField(
+                                          autofocus: false,
+                                          keyboardType: TextInputType.number,
+                                          controller: durationfilterController,
+                                          decoration: InputDecoration(
+                                            labelText: 'Duration: ',
+                                            labelStyle:
+                                                TextStyle(fontSize: 20.0),
+                                            // border: OutlineInputBorder(),
+                                            icon: Icon(Icons.place),
+                                            errorStyle: TextStyle(
+                                                color: Colors.redAccent,
+                                                fontSize: 10),
+                                          ),
+                                          //controller: priceController,
+                                        ),
+                                        ElevatedButton.icon(
+                                            onPressed: () {
+                                              setState(() {
+                                                durationfilter =
+                                                    durationfilterController
+                                                        .text;
+                                              });
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => FilterD(
+                                                      price: pricefilter,
+                                                      duration: durationfilter,
+                                                      location: locationfilter),
+                                                ),
+                                              );
+                                            },
+                                            icon: Icon(Icons.filter_list_alt),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Colors.blue),
+                                            label: Text("Filter"))
+                                      ],
+                                    ),
+                                  ));
+                            });
+                      },
                       icon: Icon(Icons.filter_alt),
                       label: Text("Duration")),
                 ],
