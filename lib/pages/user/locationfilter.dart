@@ -41,14 +41,7 @@ class _FilterLState extends State<FilterL> {
   }
 
   var whatsapp = "";
-  final Stream<QuerySnapshot> tourStream = FirebaseFirestore.instance
-      .collection('tours')
-      // .where('price', isLessThanOrEqualTo: '$fprice')
-      .where('location', isEqualTo: "$flocation")
-      //.orderBy(field)
-      // .where('duration', isLessThan: '$fduration')
-      //.where('email', isEqualTo: 'test4@test.com')
-      .snapshots();
+
   // Future Steam<QuerySnapshot> tourStream() async{}
 
   addfavorite(title, imgUrl, location, date, duration, price, details, id,
@@ -99,6 +92,14 @@ class _FilterLState extends State<FilterL> {
 
   @override
   Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> tourStream = FirebaseFirestore.instance
+        .collection('tours')
+        // .where('price', isLessThanOrEqualTo: '$fprice')
+        .where('location', isEqualTo: widget.location)
+        //.orderBy(field)
+        // .where('duration', isLessThan: '$fduration')
+        //.where('email', isEqualTo: 'test4@test.com')
+        .snapshots();
     return Scaffold(
       appBar: AppBar(
         title: Text("Filtered Tours"),
