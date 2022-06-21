@@ -208,7 +208,9 @@ class _AddtourState extends State<Addtour> {
                     decoration: InputDecoration(
                       labelText: 'Title: ',
                       labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
                       errorStyle:
                           TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
@@ -228,7 +230,9 @@ class _AddtourState extends State<Addtour> {
                     decoration: InputDecoration(
                       labelText: 'Location: ',
                       labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
                       errorStyle:
                           TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
@@ -248,7 +252,9 @@ class _AddtourState extends State<Addtour> {
                     decoration: InputDecoration(
                       labelText: 'Date: YYYY-MM-DD',
                       labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
                       errorStyle:
                           TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
@@ -297,7 +303,9 @@ class _AddtourState extends State<Addtour> {
                     decoration: InputDecoration(
                       labelText: 'Duration: ',
                       labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
                       errorStyle:
                           TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
@@ -317,7 +325,9 @@ class _AddtourState extends State<Addtour> {
                     decoration: InputDecoration(
                       labelText: 'Details: ',
                       labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
                       errorStyle:
                           TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
@@ -338,7 +348,9 @@ class _AddtourState extends State<Addtour> {
                     decoration: InputDecoration(
                       labelText: 'Price: ',
                       labelStyle: TextStyle(fontSize: 20.0),
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
                       errorStyle:
                           TextStyle(color: Colors.redAccent, fontSize: 15),
                     ),
@@ -370,8 +382,45 @@ class _AddtourState extends State<Addtour> {
                             // fetchdata();
                             //  registration();
                             //  addUser();
-
+                            if (_image == null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.orangeAccent,
+                                  content: Text(
+                                    "Please Upload Image",
+                                    style: TextStyle(
+                                        fontSize: 18.0, color: Colors.black),
+                                  ),
+                                ),
+                              );
+                            }
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: Colors.white,
+                              content: Center(
+                                child: Column(
+                                  children: [
+                                    Padding(padding: EdgeInsets.all(200.0)),
+                                    Center(
+                                      child: CircularProgressIndicator(
+                                        backgroundColor: Colors.purple,
+                                      ),
+                                    ),
+                                    Padding(padding: EdgeInsets.all(10.0)),
+                                    Text(
+                                      "Please Wait...",
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Colors.purple,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ));
                             await uploadPic(context);
+                            setState(() {
+                              _image = null;
+                            });
                             // initState();
                             // if (imgUrl != "") {
                             //   addTour();

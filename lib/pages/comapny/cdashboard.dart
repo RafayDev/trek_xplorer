@@ -34,10 +34,10 @@ class _CdashboardState extends State<Cdashboard> {
       //  var name = data['name'];
       //  var phone = data['phone'];
       // name = data['name'];
-      setState(() {
-        count = count + 1;
-        print(count);
-      });
+      // setState(() {
+      //   count = count + 1;
+      //   print(count);
+      // });
 
       //  count = count + 1;
     }
@@ -71,8 +71,8 @@ class _CdashboardState extends State<Cdashboard> {
               Column(
                 children: [
                   Container(
-                      height: 120,
-                      width: 350,
+                      height: 100,
+                      width: 300,
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -90,7 +90,7 @@ class _CdashboardState extends State<Cdashboard> {
                                       Text(
                                         'Welcome,',
                                         style: TextStyle(
-                                            fontSize: 35.0,
+                                            fontSize: 25.0,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ],
@@ -102,14 +102,14 @@ class _CdashboardState extends State<Cdashboard> {
                             Text(
                               name,
                               style: TextStyle(
-                                  fontSize: 35.0, fontWeight: FontWeight.bold),
+                                  fontSize: 25.0, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
                       )),
                   Container(
-                      height: 120,
-                      width: 350,
+                      height: 100,
+                      width: 300,
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -127,7 +127,7 @@ class _CdashboardState extends State<Cdashboard> {
                                       Text(
                                         'DTS No.',
                                         style: TextStyle(
-                                            fontSize: 35.0,
+                                            fontSize: 25.0,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ],
@@ -139,7 +139,7 @@ class _CdashboardState extends State<Cdashboard> {
                             Text(
                               "$dts",
                               style: TextStyle(
-                                  fontSize: 35.0, fontWeight: FontWeight.bold),
+                                  fontSize: 25.0, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
