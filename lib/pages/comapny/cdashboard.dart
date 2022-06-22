@@ -63,11 +63,11 @@ class _CdashboardState extends State<Cdashboard> {
       // backgroundColor: Color.fromARGB(255, 231, 170, 241),
       body: Column(
         children: [
-          Padding(padding: EdgeInsets.only(top: 50)),
+          Padding(padding: EdgeInsets.only(top: 110)),
           Wrap(
             children: [
               // Padding(padding: EdgeInsets.fromLTRB(0, 100, 0, 0)),
-              Padding(padding: EdgeInsets.all(15)),
+              Padding(padding: EdgeInsets.all(30)),
               Column(
                 children: [
                   Container(
