@@ -196,6 +196,12 @@ class _ChangePasswordState extends State<ChangePassword> {
                                               color: Colors.redAccent,
                                               fontSize: 10),
                                         ),
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please Enter Name.';
+                                          }
+                                          return null;
+                                        },
                                         //controller: priceController,
                                       ),
                                       ElevatedButton.icon(

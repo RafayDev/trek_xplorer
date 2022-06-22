@@ -279,8 +279,9 @@ class _CsignupState extends State<Csignup> {
                 margin: EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
                   autofocus: false,
+                  keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
-                    labelText: 'Whatsapp No.: ',
+                    labelText: 'Whatsapp No: e.g. +92************ ',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(30.0),
@@ -292,6 +293,8 @@ class _CsignupState extends State<Csignup> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please Enter Whatsapp No.';
+                    } else if (!value.contains('+')) {
+                      return 'Please Enter Valid No.';
                     }
                     return null;
                   },

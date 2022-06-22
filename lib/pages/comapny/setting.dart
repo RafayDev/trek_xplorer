@@ -188,10 +188,11 @@ class _CsettingState extends State<Csetting> {
                                       ),
                                       TextFormField(
                                         autofocus: false,
-                                        keyboardType: TextInputType.number,
+                                        keyboardType: TextInputType.phone,
                                         controller: changeWhatsappController,
                                         decoration: InputDecoration(
-                                          labelText: 'Whatsapp: ',
+                                          labelText:
+                                              'Whatsapp: e.g. +92********** ',
                                           labelStyle: TextStyle(fontSize: 20.0),
                                           // border: OutlineInputBorder(),
                                           icon: Icon(Icons.whatsapp),
@@ -199,6 +200,14 @@ class _CsettingState extends State<Csetting> {
                                               color: Colors.redAccent,
                                               fontSize: 10),
                                         ),
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please Enter Whatsapp No.';
+                                          } else if (!value.contains('+')) {
+                                            return 'Please Enter Valid No.';
+                                          }
+                                          return null;
+                                        },
                                         //controller: priceController,
                                       ),
                                       ElevatedButton.icon(
