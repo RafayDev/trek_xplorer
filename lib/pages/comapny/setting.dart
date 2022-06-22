@@ -212,55 +212,75 @@ class _CsettingState extends State<Csetting> {
                                       ),
                                       ElevatedButton.icon(
                                           onPressed: () async {
-                                            setState(() {
-                                              changeWhatsapp =
-                                                  changeWhatsappController.text;
-                                            });
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                              backgroundColor: Colors.white,
-                                              content: Center(
-                                                child: Column(
-                                                  children: [
-                                                    Padding(
-                                                        padding: EdgeInsets.all(
-                                                            200.0)),
-                                                    Center(
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        backgroundColor:
-                                                            Colors.purple,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                        padding: EdgeInsets.all(
-                                                            10.0)),
-                                                    Text(
-                                                      "Please Wait...",
-                                                      style: TextStyle(
-                                                        fontSize: 20.0,
-                                                        color: Colors.purple,
-                                                      ),
-                                                    ),
-                                                  ],
+                                            if (changeWhatsappController.text ==
+                                                "") {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  backgroundColor: Colors.red,
+                                                  content: Text(
+                                                    'Please Enter Whatsapp !',
+                                                    style: TextStyle(
+                                                        fontSize: 18.0),
+                                                  ),
                                                 ),
-                                              ),
-                                            ));
-                                            await changewhatsapp();
-                                            await getwhatsapp();
-                                            Navigator.pop(context);
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                backgroundColor:
-                                                    Colors.orangeAccent,
-                                                content: Text(
-                                                  'Your Whatsapp Number has been Changed !',
-                                                  style:
-                                                      TextStyle(fontSize: 18.0),
+                                              );
+                                            }
+                                            if (changeWhatsappController.text !=
+                                                "") {
+                                              setState(() {
+                                                changeWhatsapp =
+                                                    changeWhatsappController
+                                                        .text;
+                                              });
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                backgroundColor: Colors.white,
+                                                content: Center(
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  200.0)),
+                                                      Center(
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          backgroundColor:
+                                                              Colors.purple,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0)),
+                                                      Text(
+                                                        "Please Wait...",
+                                                        style: TextStyle(
+                                                          fontSize: 20.0,
+                                                          color: Colors.purple,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            );
+                                              ));
+                                              await changewhatsapp();
+                                              await getwhatsapp();
+                                              Navigator.pop(context);
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  backgroundColor:
+                                                      Colors.orangeAccent,
+                                                  content: Text(
+                                                    'Your Whatsapp Number has been Changed !',
+                                                    style: TextStyle(
+                                                        fontSize: 18.0),
+                                                  ),
+                                                ),
+                                              );
+                                            }
                                           },
                                           icon: Icon(Icons.edit),
                                           style: ElevatedButton.styleFrom(
