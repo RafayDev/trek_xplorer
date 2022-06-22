@@ -206,55 +206,72 @@ class _ChangePasswordState extends State<ChangePassword> {
                                       ),
                                       ElevatedButton.icon(
                                           onPressed: () async {
-                                            setState(() {
-                                              changeName =
-                                                  changeNameController.text;
-                                            });
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                              backgroundColor: Colors.white,
-                                              content: Center(
-                                                child: Column(
-                                                  children: [
-                                                    Padding(
-                                                        padding: EdgeInsets.all(
-                                                            200.0)),
-                                                    Center(
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        backgroundColor:
-                                                            Colors.purple,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                        padding: EdgeInsets.all(
-                                                            10.0)),
-                                                    Text(
-                                                      "Please Wait...",
-                                                      style: TextStyle(
-                                                        fontSize: 20.0,
-                                                        color: Colors.purple,
-                                                      ),
-                                                    ),
-                                                  ],
+                                            if (changeNameController.text ==
+                                                "") {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  backgroundColor: Colors.red,
+                                                  content: Text(
+                                                    'Enter Your Name !',
+                                                    style: TextStyle(
+                                                        fontSize: 18.0),
+                                                  ),
                                                 ),
-                                              ),
-                                            ));
-                                            await changename();
-                                            await getname();
-                                            Navigator.pop(context);
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                backgroundColor:
-                                                    Colors.orangeAccent,
-                                                content: Text(
-                                                  'Your Name has been Changed !',
-                                                  style:
-                                                      TextStyle(fontSize: 18.0),
+                                              );
+                                            } else {
+                                              setState(() {
+                                                changeName =
+                                                    changeNameController.text;
+                                              });
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                backgroundColor: Colors.white,
+                                                content: Center(
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  200.0)),
+                                                      Center(
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          backgroundColor:
+                                                              Colors.purple,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0)),
+                                                      Text(
+                                                        "Please Wait...",
+                                                        style: TextStyle(
+                                                          fontSize: 20.0,
+                                                          color: Colors.purple,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            );
+                                              ));
+                                              await changename();
+                                              await getname();
+                                              Navigator.pop(context);
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  backgroundColor:
+                                                      Colors.orangeAccent,
+                                                  content: Text(
+                                                    'Your Name has been Changed !',
+                                                    style: TextStyle(
+                                                        fontSize: 18.0),
+                                                  ),
+                                                ),
+                                              );
+                                            }
                                           },
                                           icon: Icon(Icons.edit),
                                           style: ElevatedButton.styleFrom(
