@@ -225,9 +225,21 @@ class _CsettingState extends State<Csetting> {
                                                   ),
                                                 ),
                                               );
-                                            }
-                                            if (changeWhatsappController.text !=
-                                                "") {
+                                            } else if (!changeWhatsappController
+                                                .text
+                                                .contains('+')) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  backgroundColor: Colors.red,
+                                                  content: Text(
+                                                    'Please Enter Valid Whatsapp !',
+                                                    style: TextStyle(
+                                                        fontSize: 18.0),
+                                                  ),
+                                                ),
+                                              );
+                                            } else {
                                               setState(() {
                                                 changeWhatsapp =
                                                     changeWhatsappController
